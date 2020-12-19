@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<style type="text/css">
+	#args {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#args > div {
+		margin-bottom: 15px;
+	}
+</style>
+
+<body>
+
+<form id="args">
+	<div>
+		<label for="baseVal">Base Value :</label>
+		<input type="text" name="baseVal">
+	</div>
+	<div>
+		<label for="notation">Change Notation :</label>
+		<input type="text" name="notation">
+	</div>
+	<div>
+		<input type="submit" value="SUBMIT"></input>
+	</div>
+</form>
+
+</body>
+
+<script type="text/javascript" src="./expression_tree.js"></script>
+
+<script type="text/javascript">
+
+	document.addEventListener( "submit" , ( event ) => {
+		event.preventDefault()
+
+		let args_form = new FormData( document.querySelector( "#args" ) )
+		let json_data = {}
+		
+		args_form.forEach( ( val , key ) => {
+			json_data[ key ] = val
+		})
+
+		let postfix = convert_to_postfix( `${json_data.baseVal}${json_data.notation}` )
+		let infix = convert_to_infix( postfix )
+		let sum = calculate_precentages( postfix[0] , infix )
+
+		console.log( sum )
+
+	})
+
+</script>
+
+</html>
